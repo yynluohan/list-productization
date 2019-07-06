@@ -11,18 +11,6 @@ import OrderListItem from './components/orderListItem/OrderListItem';
 import TitledListItem from './components/titledListItem/TitledListItem';
 
 
-export {
-  ScalableList,
-  LineContentItem,
-  ContentListItem,
-  BlogListItem,
-  FlowItem,
-  CommentListItem,
-  OrderListItem,
-  TitledListItem
-};
-
-
 // 1. Initialize
 const app = dva();
 
@@ -37,3 +25,14 @@ app.router(require('./router').default);
 
 // 5. Start
 app.start('#root');
+
+export {
+  ScalableList,
+  LineContentItem,
+  ContentListItem,
+  BlogListItem,
+  FlowItem,
+  CommentListItem,
+  OrderListItem,
+  TitledListItem
+};
