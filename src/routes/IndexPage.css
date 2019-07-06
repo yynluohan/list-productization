@@ -1,0 +1,32 @@
+.top {
+  background-color: #000;
+  color:#fff;
+  text-align: center;
+  padding:20px 0;
+  position: fixed;
+  z-index: 99;
+  top:0;
+  right:0;
+  left:0;
+}
+
+.container {
+  display: flex;;
+  justify-content: space-between;
+  margin-top: 80px;
+}
+
+.menu {
+  width:250px;
+  list-style: none;
+  background-color: #000;
+  color:#d6d0d0;
+  min-height: 100vh;
+}
+
+.menu div {
+  padding:1em 0;
+  cursor: pointer;
+  padding-left: 1em;
+  border-bottom: 1px solid #515151;
+}
