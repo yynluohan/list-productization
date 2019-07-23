@@ -1,16 +1,7 @@
 import React from 'react';
 import styles from './IndexPage.css';
 
-import {
-  ScalableList,
-  LineContentItem,
-  ContentListItem,
-  BlogListItem,
-  FlowItem,
-  CommentListItem,
-  OrderListItem,
-  TitledListItem
-} from '../index';
+import { ScalableList } from '../index';
 
 class IndexPage extends React.Component {
 
@@ -201,6 +192,9 @@ class IndexPage extends React.Component {
       loadmore: false,
       item:{
         type:itemName
+      },
+      extraProps: {
+
       }
     }
 
@@ -212,7 +206,7 @@ class IndexPage extends React.Component {
             {
               listData.map((item,index) => (
                 <div key={index} onClick={() => this.onClick(item,index)}
-                  style={{ backgroundColor: selectIndex == index ? '#1890ff' : '#000'}}
+                  style={{ backgroundColor: selectIndex === index ? '#1890ff' : '#000'}}
                 >
                   {item.itemName}
                 </div>

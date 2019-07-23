@@ -3,7 +3,7 @@ export function gateWay(gateWayData,itemData) {
   if (Object.keys(gateWayData).length > 0) {
     for (let key in gateWayData) {
       //需要gateway的格式只有一层数据，如'a':'a1'
-      if (key.split('-').length == 1) {
+      if (key.split('-').length === 1) {
         if (!(key in itemData)) {
           itemData[key] = itemData[gateWayData[key]]
           delete itemData[gateWayData[key]]

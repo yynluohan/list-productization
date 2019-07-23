@@ -15,7 +15,6 @@
  */
 
 import React from 'react';
-import { remove } from '../../utils/services';
 
 export default class CommentListItem extends React.Component {
 
@@ -91,7 +90,7 @@ export default class CommentListItem extends React.Component {
 
     return (
       <div style={ style }>
-        { icon ? <img src={ icon } style={ iconStyle }/> : ''}
+        { icon ? <img src={ icon } alt='image' style={ iconStyle }/> : ''}
         <div style={ sectionStyle }>
           <div style={{display: 'flex',justifyContent: 'space-between'}}>
             <span style={nameStyle}>{name}</span>

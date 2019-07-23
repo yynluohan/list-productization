@@ -2,9 +2,7 @@ import React from 'react';
 import { query } from '../../utils/services';
 import { getScrollHeight,getScrollTop,getClientHeight} from '../../utils/getHeight';
 import { gateWay } from '../../utils/transform';
-import { ActionFlowItem,ContentListItem,LineContentItem,OrderListItem,
-         TitledListItem,BlogListItem,CommentListItem,FlowItem,OrderCartListItem,
-         AssignListItem } from '../../index';
+import { itemMap } from '../getItemType';
 
 export default class ScalableList extends React.Component {
 
@@ -16,7 +14,8 @@ export default class ScalableList extends React.Component {
       total:0,
       isMore:false,  //是否全部获取完数据
       pageSize: props.pageSize || 10,
-      API: props.API || '',
+      API: props.API || '',   // 查询列表API(若有传入，则不需传入list)
+      touchHeight: props.touchHeight || 150,  // 默认距离底部150px时触发滚动
     }
   }
 
@@ -30,14 +29,14 @@ export default class ScalableList extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     console.log('???????',nextProps);
-    if (nextProps.list != undefined) {
+    if (nextProps.list !== undefined) {
       this.setState({
         list: nextProps.list
       })
     }
-    if (nextProps.API != undefined) {
+    if (nextProps.API !== undefined) {
       this.setState({
         API: nextProps.API,
       })
@@ -49,18 +48,18 @@ export default class ScalableList extends React.Component {
     }
   }
 
-  componentWillMount(){
-      window.addEventListener('scroll', this.scrollFunction)
-    }
+  UNSAFE_componentWillMount(){
+    window.addEventListener('scroll', this.scrollFunction)
+  }
 
   componentWillUnmount(){
     window.removeEventListener('scroll',this.scrollFunction)
   }
 
   scrollFunction = () => {
-    const { list,total,current,API } = this.state;
+    const { list,total,current,API,touchHeight } = this.state;
     const bottomHeight = getScrollHeight() - getScrollTop() - getClientHeight();
-    if (bottomHeight < 150 && list.length < total && this.props.API) {
+    if (bottomHeight < touchHeight && list.length < total && this.props.API) {
       const data = {
         pageNum:current + 1,
         API,
@@ -78,18 +77,18 @@ export default class ScalableList extends React.Component {
    getList = (queryData) => {
      const { pageSize } = this.state;
      const list = queryData.list;
-     console.log('AAA list = ',list);
      const API = queryData.API;
      delete queryData.API
      query(API,{...queryData,pageSize}).then(({ code, data }) => {
-       if (code == 200) {
+       if (code && code === 200) {
+         //外部传入getList，获取列表数据
          if (this.props.getList) {
            this.props.getList(data)
          }
          let isMore = false;
          const getLsit = data.records ? list.concat(data.records) : data.data ? list.concat(data.data) : [];
          if (list.length > 0) {
-           if (getLsit.length == 0 || getLsit.length == data.total) {
+           if (getLsit.length === 0 || getLsit.length === data.total) {
              isMore = true
            }
          }
@@ -106,31 +105,19 @@ export default class ScalableList extends React.Component {
   render() {
 
     const { gateWayData = {},item = {},loadmore = true } = this.props;
-    const { list,current,total,isMore } = this.state;
-    const _this = this;
+    const { list,isMore } = this.state;
 
     const createItem = (itemData,index) => {
       itemData = gateWay(gateWayData,itemData);
       itemData.listLength = list.length || 0;
       itemData.currentIndex = index;
       if(item.type){
-        switch(item.type){
-          case 'ActionFlowItem':     return <ActionFlowItem {...itemData}{...this.props.actionFlowItemProps || {}}/>;      break;
-          case 'ContentListItem':    return <ContentListItem {...itemData}{...this.props.contentListItemProps || {}}/>;    break;
-          case 'LineContentItem':    return <LineContentItem {...itemData}{...this.props.lineContentItemProps || {}}/>;    break;
-          case 'OrderListItem':      return <OrderListItem {...itemData}{...this.props.orderListItemProps || {}}/>;        break;
-          case 'TitledListItem':     return <TitledListItem {...itemData}{...this.props.titledListItemProps || {}}/>;        break;
-          case 'BlogListItem':       return <BlogListItem {...itemData}{...this.props.blogListItemProps || {}}/>;          break;
-          case 'CommentListItem':    return <CommentListItem {...itemData}{...this.props.commentListItemProps || {}}/>;    break;
-          case 'FlowItem':           return <FlowItem {...itemData}{...this.props.flowItemProps || {}}/>;                  break;
-          case 'OrderCartListItem':  return <OrderCartListItem {...itemData}{...this.props.orderCartListItemProps || {}}/>;break;
-          case 'AssignListItem':    return <AssignListItem {...itemData}{...this.props.assignListItemProps || {}}/> ;break;
-          default: return ''
-        }
+        const ItemElement = itemMap(item.type);
+        return <ItemElement {...itemData}{...this.props.extraProps} />
+
       } else {
         if(this.props.children){
           const child = this.props.children;
-          const index = index;
           return React.cloneElement(child,{
             itemData:{
               ...itemData,
@@ -162,9 +149,8 @@ export default class ScalableList extends React.Component {
             </div>
           ))
         }
-        { loadmore  ? showFooter() : '' }
+        { loadmore ? showFooter() : '' }
       </div>
     )
-
   }
 }

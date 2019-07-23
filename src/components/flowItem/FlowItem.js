@@ -61,7 +61,7 @@ export default class FlowItem  extends React.Component {
 
     return (
       <div style={ style } onClick={() => this.onClick(path)}>
-        { icon ? <img src={icon} style={ iconStyle }/> : '' }
+        { icon ? <img src={icon} alt='image' style={ iconStyle }/> : '' }
         { title ? <div style={ titleStyle }>{ title }</div> : '' }
         <div style={ arrowStyle }>
           >
