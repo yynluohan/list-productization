@@ -113,7 +113,7 @@ export default class TitledListItem extends React.Component {
     }
 
     const createItem = () => {
-      if(type == 'column'){
+      if(type === 'column'){
         return (
           <div style={flexStyle}>
             <div style={itemLeft}>
@@ -127,7 +127,7 @@ export default class TitledListItem extends React.Component {
           </div>
         )
       }
-      if(type == 'line'){
+      if(type === 'line'){
         return (
           <div style={ lineFlexStyle }>
             <div style={ statusStyle }>{ status }</div>

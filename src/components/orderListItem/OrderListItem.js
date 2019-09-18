@@ -104,10 +104,6 @@ export default class OrderListItem extends React.Component {
       ...this.props.subTitleStyle
     }
 
-    const actionStyle = {
-      color:'rgba(0, 0, 0, 0.65)'
-    }
-
     return (
       <div>
         <div style={ style } onClick={() =>this.onClick(action)}>

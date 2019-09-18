@@ -29,7 +29,7 @@ export default class ContentListItem extends React.Component {
 
      const { image,title,content,stats,route,detailText } = this.props;
      const icon = stats && stats.icon ? stats.icon : '';
-     const record = stats && stats.record !=undefined ? stats.record  : '';
+     const record = stats && stats.record !== undefined ? stats.record  : '';
 
      const style = {
         backgroundColor:'#fff',
@@ -123,8 +123,8 @@ export default class ContentListItem extends React.Component {
               </div>
               <div style={ itemFooter }>
                 <div style= {{ display:'flex',alignItems:'center' }}>
-                  { icon ? <img src={ icon } style={ iconStyle }/> : '' }
-                  { record != undefined ? <span>{ record }</span> : '' }
+                  { icon ? <img src={ icon } alt='image' style={ iconStyle }/> : '' }
+                  { record !== undefined ? <span>{ record }</span> : '' }
                 </div>
                 {
                   detailText ?

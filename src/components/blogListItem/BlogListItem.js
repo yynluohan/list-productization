@@ -174,7 +174,7 @@ export default class BlogListItem extends React.Component {
                 {
                   stats.map((item, index) => (
                     <span key={index} style={itemStats}>
-                      <img src={item.icon} style={statsImg}/>
+                      <img src={item.icon} alt='image' style={statsImg}/>
                       <span>{item.record}</span>
                     </span>
                   ))
