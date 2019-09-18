@@ -63,7 +63,6 @@ export default class TitledListItem extends React.Component {
     }
 
     //横向
-
     const lineFlexStyle = {
       display: 'flex',
       alignContent:'space-between',
@@ -113,7 +112,6 @@ export default class TitledListItem extends React.Component {
       }
     }
 
-
     const createItem = () => {
       if(type == 'column'){
         return (
@@ -146,7 +144,6 @@ export default class TitledListItem extends React.Component {
           </div>
         )
       }
-
     }
 
     return (
@@ -155,5 +152,4 @@ export default class TitledListItem extends React.Component {
       </div>
     )
   }
-
 }

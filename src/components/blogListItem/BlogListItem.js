@@ -167,7 +167,6 @@ export default class BlogListItem extends React.Component {
             </div>
             : ''
           }
-
           <div style={{margin: '0.5em 0',display:'flex',justifyContent:'space-between'}}>
             {
               stats && stats.length > 0 ?

@@ -136,5 +136,4 @@ export default class ContentListItem extends React.Component {
        </div>
      )
    }
-
 }

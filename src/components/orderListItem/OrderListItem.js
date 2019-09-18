@@ -130,15 +130,13 @@ export default class OrderListItem extends React.Component {
               </div>
             </div>
           </div>
-
           {
             timestamp ?
             <div style={{ marginTop:'0.5em' }}>{ timestamp }</div>
            : null
-        }
+          }
         </div>
       </div>
     )
   }
-
 }

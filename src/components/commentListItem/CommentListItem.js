@@ -93,7 +93,7 @@ export default class CommentListItem extends React.Component {
       <div style={ style }>
         { icon ? <img src={ icon } style={ iconStyle }/> : ''}
         <div style={ sectionStyle }>
-          <div style={{display: 'flex',justifyContent: 'space-between'}}>
+          <div style={{ display: 'flex',justifyContent: 'space-between' }}>
             <span style={nameStyle}>{name}</span>
             {
               isDeleteAllow ?

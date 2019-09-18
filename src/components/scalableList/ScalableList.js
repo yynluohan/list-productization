@@ -1,6 +1,6 @@
 import React from 'react';
 import { query } from '../../utils/services';
-import { getScrollHeight,getScrollTop,getClientHeight} from '../../utils/getHeight';
+import { getScrollHeight,getScrollTop,getClientHeight } from '../../utils/getHeight';
 import { gateWay } from '../../utils/transform';
 import { ActionFlowItem,ContentListItem,LineContentItem,OrderListItem,
          TitledListItem,BlogListItem,CommentListItem,FlowItem,OrderCartListItem,
@@ -31,7 +31,6 @@ export default class ScalableList extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('???????',nextProps);
     if (nextProps.list != undefined) {
       this.setState({
         list: nextProps.list
@@ -50,8 +49,8 @@ export default class ScalableList extends React.Component {
   }
 
   componentWillMount(){
-      window.addEventListener('scroll', this.scrollFunction)
-    }
+    window.addEventListener('scroll', this.scrollFunction)
+  }
 
   componentWillUnmount(){
     window.removeEventListener('scroll',this.scrollFunction)
@@ -165,6 +164,5 @@ export default class ScalableList extends React.Component {
         { loadmore  ? showFooter() : '' }
       </div>
     )
-
   }
 }
