@@ -17,24 +17,22 @@
     </BlogListItem>
  */
 
-import React from 'react';
+import React from 'react'
 
 export default class BlogListItem extends React.Component {
-
-  onClick = (value) => {
-    const id = this.props.id || '';
-    if(value){
+  onClick (value) {
+    const id = this.props.id || ''
+    if (value) {
       window.location.href = `#${value}?id=${id}`
     }
   }
 
-  render(){
-
-    const { icon,name,subtitle,content,lives,tags,stats,route,detailText } = this.props;
+  render () {
+    const { icon, name, subtitle, content, lives, tags, stats, route, detailText } = this.props
 
     const style = {
       display: 'flex',
-      backgroundColor:'#fff',
+      backgroundColor: '#fff',
       padding: '0.7em',
       borderBottom: '1px solid rgb(242, 242, 242)',
       ...this.props.style
@@ -44,7 +42,7 @@ export default class BlogListItem extends React.Component {
       width: '44px',
       height: '44px',
       margin: '3px',
-      backgroundImage:`url(${icon})`,
+      backgroundImage: `url(${icon})`,
       backgroundPosition: 'center center',
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
@@ -54,7 +52,7 @@ export default class BlogListItem extends React.Component {
 
     const sectionStyle = {
       display: 'flex',
-      flexDirection:'column',
+      flexDirection: 'column',
       marginLeft: '0.8em',
       width: 'calc(100% - 50px - 0.8em)',
       ...this.props.sectionStyle
@@ -62,41 +60,41 @@ export default class BlogListItem extends React.Component {
 
     const nameStyle = {
       fontSize: '16px',
-      color:'#333',
+      color: '#333',
       ...this.props.nameStyle
     }
 
     const subtitleStyle = {
-      color:'#888',
-      fontSize:'13px',
-      margin:'5px 0',
+      color: '#888',
+      fontSize: '13px',
+      margin: '5px 0',
       ...this.props.subtitleStyle
     }
 
     const contentStyle = {
-      fontSize:'16px',
-      color:'#000',
+      fontSize: '16px',
+      color: '#000',
       wordBreak: 'break-all',
       textOverflow: 'ellipsis',
       display: '-webkit-box',
       WebkitLineClamp: 3,
-      /*autoprefixer: off*/
+      /* autoprefixer: off */
       WebkitBoxOrient: 'vertical',
-      /*autoprefixer: on*/
+      /* autoprefixer: on */
       overflow: 'hidden',
-      ...this.props.contentStyle,
+      ...this.props.contentStyle
     }
 
     const livesListStyle = {
       display: 'flex',
       flexWrap: 'wrap',
-      justifyContent:'flex-start',
+      justifyContent: 'flex-start',
       margin: '10px 0 5px 0',
       ...this.props.livesListStyle
     }
 
-    const tagListStyle =  {
-      display:'flex',
+    const tagListStyle = {
+      display: 'flex',
       flexWrap: 'wrap',
       fontSize: '13px',
       color: '#c28324',
@@ -111,14 +109,14 @@ export default class BlogListItem extends React.Component {
     }
 
     const detailTextStyle = {
-      color:'rgb(136, 136, 136)',
-      marginRight:'5px',
+      color: 'rgb(136, 136, 136)',
+      marginRight: '5px',
       ...this.props.detailTextStyle
     }
 
     const statsImg = {
-      width:'16px',
-      height:'16px',
+      width: '16px',
+      height: '16px',
       margin: '2px 5px 5px 0px',
       ...this.props.statsImg
     }
@@ -126,68 +124,68 @@ export default class BlogListItem extends React.Component {
     const liveStyle = (value) => {
       return {
         width: '80px',
-        height:'80px',
+        height: '80px',
         borderRadius: '3px',
-        margin:'0 5px 5px 0',
+        margin: '0 5px 5px 0',
         backgroundImage: `url(${value})`,
-        backgroundPosition:'center',
+        backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        backgroundSize:'cover',
-        overflow:'hidden',
+        backgroundSize: 'cover',
+        overflow: 'hidden',
         ...this.props.livesImage
       }
     }
 
     return (
-      <div style={ style } onClick={() => this.onClick(route)}>
-        { icon ? <div style={ iconStyle }></div> : null }
-        <div style={ sectionStyle }>
-          <div style={ nameStyle }>{ name }</div>
-          <div style={ subtitleStyle }>{ subtitle }</div>
-          <div style={ contentStyle} >{ content }</div>
+      <div style={style} onClick={() => this.onClick(route)}>
+        {icon ? <div style={iconStyle} /> : null}
+        <div style={sectionStyle}>
+          <div style={nameStyle}>{name}</div>
+          <div style={subtitleStyle}>{subtitle}</div>
+          <div style={contentStyle}>{content}</div>
           {
-            lives && lives.length > 0 ?
-            <div style={ livesListStyle }>
-              {
-                 lives.map((item, index) => (
-                  <div key={ index } style={ liveStyle(item.url) }></div>
-                ))
-              }
-            </div>
-            : ''
-          }
-          {
-            tags && tags.length > 0 ?
-            <div style={tagListStyle}>
-              {
-                tags.map((item, index) => (
-                  <span key={index} style={{ marginRight: '1.2em' }}>{ item.tagName }</span>
-                ))
-              }
-            </div>
-            : ''
-          }
-          <div style={{margin: '0.5em 0',display:'flex',justifyContent:'space-between'}}>
-            {
-              stats && stats.length > 0 ?
-              <span>
+            lives && lives.length > 0
+              ? <div style={livesListStyle}>
                 {
-                  stats.map((item, index) => (
-                    <span key={index} style={itemStats}>
-                      <img src={item.icon} alt='image' style={statsImg}/>
-                      <span>{item.record}</span>
-                    </span>
+                  lives.map((item, index) => (
+                    <div key={index} style={liveStyle(item.url)} />
                   ))
                 }
-              </span>
+              </div>
               : ''
+          }
+          {
+            tags && tags.length > 0
+              ? <div style={tagListStyle}>
+                {
+                  tags.map((item, index) => (
+                    <span key={index} style={{ marginRight: '1.2em' }}>{item.tagName}</span>
+                  ))
+                }
+              </div>
+              : ''
+          }
+          <div style={{ margin: '0.5em 0', display: 'flex', justifyContent: 'space-between' }}>
+            {
+              stats && stats.length > 0
+                ? <span>
+                  {
+                    stats.map((item, index) => (
+                      <span key={index} style={itemStats}>
+                        <img src={item.icon} alt='image' style={statsImg} />
+                        <span>{item.record}</span>
+                      </span>
+                    ))
+                  }
+                </span>
+                : ''
             }
             {
-              detailText ?
-              <a style={detailTextStyle} onClick={() => this.onClick(route)}>
-                { detailText }
-              </a>
-              : null
+              detailText
+                ? <a style={detailTextStyle} onClick={() => this.onClick(route)}>
+                  {detailText}
+                </a>
+                : null
             }
           </div>
         </div>

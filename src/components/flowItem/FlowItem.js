@@ -11,19 +11,17 @@
     </FlowItem>
  */
 
-import React from 'react';
+import React from 'react'
 
-export default class FlowItem  extends React.Component {
-
-  onClick = (path) => {
+export default class FlowItem extends React.Component {
+  onClick (path) {
     if (path) {
       window.location.href = `#${path}`
     }
   }
 
-  render(){
-
-    const { icon,title,path } = this.props;
+  render () {
+    const { icon, title, path } = this.props
 
     const style = {
       display: 'flex',
@@ -38,15 +36,15 @@ export default class FlowItem  extends React.Component {
     const iconStyle = {
       width: '25px',
       height: '25px',
-      marginLeft:'0.8em',
+      marginLeft: '0.8em',
       ...this.props.iconStyle
     }
 
     const titleStyle = {
       flex: '1',
       fontSize: '1em',
-      color:'#000',
-      marginLeft:'0.8em',
+      color: '#000',
+      marginLeft: '0.8em',
       ...this.props.titleStyle
     }
 
@@ -60,10 +58,10 @@ export default class FlowItem  extends React.Component {
     }
 
     return (
-      <div style={ style } onClick={() => this.onClick(path)}>
-        { icon ? <img src={icon} alt='image' style={ iconStyle }/> : '' }
-        { title ? <div style={ titleStyle }>{ title }</div> : '' }
-        <div style={ arrowStyle }>
+      <div style={style} onClick={() => this.onClick(path)}>
+        {icon ? <img src={icon} alt='image' style={iconStyle} /> : ''}
+        {title ? <div style={titleStyle}>{title}</div> : ''}
+        <div style={arrowStyle}>
           >
         </div>
       </div>

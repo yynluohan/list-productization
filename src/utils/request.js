@@ -1,28 +1,24 @@
-import { trim } from './trim';
-import { get as getEndpoint } from './endpoint';
-import qs from 'qs';
-import fetch from 'dva/fetch';
+import { get as getEndpoint } from './endpoint'
+import fetch from 'dva/fetch'
 
-let isLogs = false;
-
-function checkServerError(response) {
+function checkServerError (response) {
   // 400 错误依旧格式化成为 json
   if (response.status >= 200 && response.status < 500 && response.status !== 401) {
-    return response;
+    return response
   }
-  const error = new Error(response.statusText);
-  error.response = response;
-  throw error;
+  const error = new Error(response.statusText)
+  error.response = response
+  throw error
 }
-function parseJSON(response) {
+function parseJSON (response) {
   if (response.headers.get('Content-Type').indexOf('application/json') > -1) {
     return response.json().then(data => ({
       responseJSON: data,
       url: response.url,
-      response,
-    }));;
+      response
+    }))
   }
-  return response.blob();
+  return response.blob()
   // const file = new Blob(
   //   [response.body],
   //   { type: 'application/pdf' });
@@ -30,15 +26,15 @@ function parseJSON(response) {
   // return fileURL;
 }
 
-function checkStatus({ responseJSON = {}, response, url }) {
+function checkStatus ({ responseJSON = {}, response, url }) {
   if (responseJSON.code !== undefined || responseJSON.status_code !== undefined) {
-    return responseJSON;
+    return responseJSON
   }
-  const error = new Error(responseJSON.code);
-  error.message = responseJSON.message;
-  error.code = responseJSON.code || responseJSON.status_code;
-  error.url = url;
-  throw error;
+  const error = new Error(responseJSON.code)
+  error.message = responseJSON.message
+  error.code = responseJSON.code || responseJSON.status_code
+  error.url = url
+  throw error
 }
 
 /**
@@ -48,22 +44,22 @@ function checkStatus({ responseJSON = {}, response, url }) {
  * @param  {object} [options] The options we want to pass to "fetch"
  * @return {object}           An object containing either "data" or "err"
  */
-export default function request(url, options) {
-  const opts = { ...options, 'mode': 'cors' };
+export default function request (url, options) {
+  const opts = { ...options, mode: 'cors' }
   // 默认 发送 json 格式。
   opts.headers = {
-    'Accept': 'application/json',
+    Accept: 'application/json',
     'Content-Type': 'application/json',
-    'Authorization': "Bearer " + localStorage.getItem('token'),
+    Authorization: 'Bearer ' + window.localStorage.getItem('token'),
     ...opts.headers
-  };
+  }
   if (opts.headers['Content-Type'] === false) {
     // 在上传文件的时候需要删掉，由浏览器自己设置，避免 boundary 的问题
-    delete opts.headers['Content-Type'];
+    delete opts.headers['Content-Type']
   }
 
-  //console.log(opts);
-  const finalUrl = getEndpoint() + url;
+  // console.log(opts);
+  const finalUrl = getEndpoint() + url
   return fetch(finalUrl, opts)
     .then(checkServerError)
     .then(parseJSON)

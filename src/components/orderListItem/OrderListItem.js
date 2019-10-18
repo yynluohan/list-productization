@@ -17,30 +17,27 @@
     </OrderListItem>
  */
 
-import React from 'react';
+import React from 'react'
 
 export default class OrderListItem extends React.Component {
-
-  onClick = (value) => {
-    console.log('22');
+  onClick (value) {
+    console.log('22')
     if (value) {
       window.location.href = `#${value}`
     }
   }
 
-
-  render(){
-
-    const { icon,title,subTitle,orderNumber,type,timestamp,action,place,distance } = this.props;
+  render () {
+    const { icon, title, subTitle, orderNumber, type, timestamp, action, place, distance } = this.props
 
     const style = {
       backgroundColor: '#fff',
       marginBottom: '5px',
-      padding: '0.7em',
+      padding: '0.7em'
     }
 
     const headerStyle = {
-      marginBottom:'0.5em',
+      marginBottom: '0.5em',
       display: 'flex',
       justifyContent: 'space-between',
       ...this.props.headerStyle
@@ -53,12 +50,12 @@ export default class OrderListItem extends React.Component {
 
     const iconStyle = {
       backgroundImage: `url(${icon})`,
-      width:'95px',
-      height:'75px',
-      overflow:'hidden',
+      width: '95px',
+      height: '75px',
+      overflow: 'hidden',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
-      backgroundSize:'cover',
+      backgroundSize: 'cover',
       borderRadius: '4px',
       ...this.props.iconStyle
     }
@@ -74,17 +71,17 @@ export default class OrderListItem extends React.Component {
     const positionStyle = {
       display: 'flex',
       justifyContent: 'space-between',
-      ...this.props.positionStyle,
+      ...this.props.positionStyle
     }
 
     const placeStyle = {
       fontSize: '12px',
-      color:'rgba(194, 131, 36, 1)',
+      color: 'rgba(194, 131, 36, 1)',
       ...this.props.placeStyle
     }
 
     const distanceStyle = {
-      fontSize:'12px',
+      fontSize: '12px',
       color: 'rgba(136, 136, 136, 1)',
       ...this.props.distanceStyle
     }
@@ -100,36 +97,36 @@ export default class OrderListItem extends React.Component {
       WebkitLineClamp: 2,
       overflow: 'hidden',
       fontSize: '12px',
-      flex:1,
+      flex: 1,
       ...this.props.subTitleStyle
     }
 
     return (
       <div>
-        <div style={ style } onClick={() =>this.onClick(action)}>
+        <div style={style} onClick={() => this.onClick(action)}>
           {
-            type || orderNumber ?
-            <div style={headerStyle}>
-              <div>{ type }</div>
-              <div>{ orderNumber }</div>
-            </div>
-            : null
+            type || orderNumber
+              ? <div style={headerStyle}>
+                <div>{type}</div>
+                <div>{orderNumber}</div>
+                </div>
+              : null
           }
-          <div style={ sectionStyle }>
-            <div style={ iconStyle }></div>
-            <div style={ sectionRightStyle }>
-              <div style={ titleStyle }>{ title }</div>
-              <div style={ subTitleStyle }>{ subTitle }</div>
-              <div style={ positionStyle }>
-                <span style={ placeStyle }>{ place }</span>
-                <span style={ distanceStyle }>{ distance }</span>
+          <div style={sectionStyle}>
+            <div style={iconStyle} />
+            <div style={sectionRightStyle}>
+              <div style={titleStyle}>{title}</div>
+              <div style={subTitleStyle}>{subTitle}</div>
+              <div style={positionStyle}>
+                <span style={placeStyle}>{place}</span>
+                <span style={distanceStyle}>{distance}</span>
               </div>
             </div>
           </div>
           {
-            timestamp ?
-            <div style={{ marginTop:'0.5em' }}>{ timestamp }</div>
-           : null
+            timestamp
+              ? <div style={{ marginTop: '0.5em' }}>{timestamp}</div>
+              : null
           }
         </div>
       </div>

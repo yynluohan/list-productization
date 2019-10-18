@@ -1,6 +1,6 @@
 
-if(!window.MC){
-  window.MC = {};
+if (!window.MC) {
+  window.MC = {}
 }
 
-window.MC.HOST = '';
+window.MC.HOST = ''

@@ -14,19 +14,17 @@
     </CommentListItem>
  */
 
-import React from 'react';
+import React from 'react'
 
 export default class CommentListItem extends React.Component {
-
-  onDelete = (value) => {
-    if(this.props.id){
-      this.props.onDelete(this.props.id);
+  onDelete (value) {
+    if (this.props.id) {
+      this.props.onDelete(this.props.id)
     }
   }
 
-  render(){
-
-    const { icon,name,commentName,content,subtitle,isDeleteAllow } = this.props;
+  render () {
+    const { icon, name, commentName, content, subtitle, isDeleteAllow } = this.props
 
     const style = {
       display: 'flex',
@@ -54,17 +52,17 @@ export default class CommentListItem extends React.Component {
     }
 
     const contentStyle = {
-      wordWrap:'break-word',
+      wordWrap: 'break-word',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       display: '-webkit-box',
       lineClamp: '2',
-      width:'100%',
+      width: '100%',
       ...this.props.contentStyle
     }
 
     const itemContentFirst = {
-      wordWrap:'break-word',
+      wordWrap: 'break-word',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       display: '-webkit-box',
@@ -73,7 +71,7 @@ export default class CommentListItem extends React.Component {
     }
 
     const isDeleteAllowStyle = {
-      color:'rgb(128, 128, 128)',
+      color: 'rgb(128, 128, 128)',
       ...this.props.isDeleteAllowStyle
     }
 
@@ -84,30 +82,29 @@ export default class CommentListItem extends React.Component {
     }
 
     const subtitleStyle = {
-      margin:'5px 0',
+      margin: '5px 0',
       ...this.props.subtitleStyle
     }
 
     return (
-      <div style={ style }>
-        { icon ? <img src={ icon } alt='image' style={ iconStyle }/> : ''}
-        <div style={ sectionStyle }>
-          <div style={{ display: 'flex',justifyContent: 'space-between' }}>
+      <div style={style}>
+        {icon ? <img src={icon} alt='image' style={iconStyle} /> : ''}
+        <div style={sectionStyle}>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <span style={nameStyle}>{name}</span>
             {
-              isDeleteAllow ?
-              <a style={ isDeleteAllowStyle } onClick={() => this.onDelete()}>删除</a>
-              : ''
+              isDeleteAllow
+                ? <a style={isDeleteAllowStyle} onClick={() => this.onDelete()}>删除</a>
+                : ''
             }
           </div>
-          { subtitle ? <div style={ subtitleStyle }>{ subtitle }</div> : '' }
+          {subtitle ? <div style={subtitleStyle}>{subtitle}</div> : ''}
           {
-            commentName ?
-            <div style={itemContentFirst}>
-              回复 <span style={commentNameStyle}>{ commentName }</span> : { content }
-            </div>
-            :
-            <div style={ contentStyle }>{ content }</div>
+            commentName
+              ? <div style={itemContentFirst}>
+              回复 <span style={commentNameStyle}>{commentName}</span> : {content}
+              </div>
+              : <div style={contentStyle}>{content}</div>
           }
         </div>
       </div>

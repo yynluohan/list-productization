@@ -13,32 +13,30 @@
     </TitledListItem>
  */
 
-import React from 'react';
+import React from 'react'
 
 export default class TitledListItem extends React.Component {
-
-  constructor(props){
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       type: props.type || 'column'
     }
   }
 
-  render(){
-
-    const { title,subtitle,value,status,icon } = this.props;
-    const { type } = this.state;
+  render () {
+    const { title, subtitle, value, status, icon } = this.props
+    const { type } = this.state
 
     const style = {
-       paddingBottom: '2px',
-       padding: '0 0.6em',
-       backgroundColor:'#fff',
+      paddingBottom: '2px',
+      padding: '0 0.6em',
+      backgroundColor: '#fff'
     }
 
-    //纵向
+    // 纵向
     const flexStyle = {
       display: 'flex',
-      justifyContent:'space-between',
+      justifyContent: 'space-between',
       alignItems: 'center',
       padding: '0.6em 0',
       borderBottom: '1px solid #f2f2f2',
@@ -49,7 +47,7 @@ export default class TitledListItem extends React.Component {
       display: 'flex',
       flexDirection: 'column',
       marginBottom: '0.3em',
-      ...this.props.itemLeft,
+      ...this.props.itemLeft
     }
 
     const titleStyle = {
@@ -62,10 +60,10 @@ export default class TitledListItem extends React.Component {
       ...this.props.itemRight
     }
 
-    //横向
+    // 横向
     const lineFlexStyle = {
       display: 'flex',
-      alignContent:'space-between',
+      alignContent: 'space-between',
       alignItems: 'center',
       padding: '0.6em 0',
       borderBottom: '1px solid #f2f2f2',
@@ -82,11 +80,11 @@ export default class TitledListItem extends React.Component {
     const iconStyle = {
       width: '40px',
       height: '40px',
-      backgroundImage:`url(${icon})`,
-      overflow:'hidden',
+      backgroundImage: `url(${icon})`,
+      overflow: 'hidden',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
-      backgroundSize:'cover',
+      backgroundSize: 'cover',
       ...this.props.iconStyle
     }
 
@@ -101,11 +99,11 @@ export default class TitledListItem extends React.Component {
     }
 
     const statusStyle = {
-      marginRight:'1em',
+      marginRight: '1em',
       ...this.props.statusStyle
     }
 
-    const itemValue = (value) =>{
+    const itemValue = (value) => {
       return {
         color: value >= 0 ? '#F60303' : '#F39D0D',
         ...this.props.itemValue
@@ -113,42 +111,42 @@ export default class TitledListItem extends React.Component {
     }
 
     const createItem = () => {
-      if(type === 'column'){
+      if (type === 'column') {
         return (
           <div style={flexStyle}>
             <div style={itemLeft}>
-              { title ? <div style={ titleStyle }>{ title }</div> : '' }
-              { subtitle ? <div>{ subtitle }</div> : '' }
+              {title ? <div style={titleStyle}>{title}</div> : ''}
+              {subtitle ? <div>{subtitle}</div> : ''}
             </div>
             <div style={itemRight}>
-              { status ? <div style={ statusStyle} >{ status }</div> : '' }
-              { status ? <div style={ itemValue(value)} >{ value }</div> :''}
+              {status ? <div style={statusStyle}>{status}</div> : ''}
+              {status ? <div style={itemValue(value)}>{value}</div> : ''}
             </div>
           </div>
         )
       }
-      if(type === 'line'){
+      if (type === 'line') {
         return (
-          <div style={ lineFlexStyle }>
-            <div style={ statusStyle }>{ status }</div>
+          <div style={lineFlexStyle}>
+            <div style={statusStyle}>{status}</div>
             <div style={{ flex: '1' }}>
-                <div style={ middleStyle }>
-                  { icon ? <div style={ iconStyle }></div> : null }
-                  <div style={{marginLeft: '1em'}}>
-                      { title ? <div style={itemTransTitle}>{ title }</div> : '' }
-                      { subtitle ? <div style={lineSubtitleStyle}>{ subtitle }</div> : '' }
-                  </div>
+              <div style={middleStyle}>
+                {icon ? <div style={iconStyle} /> : null}
+                <div style={{ marginLeft: '1em' }}>
+                  {title ? <div style={itemTransTitle}>{title}</div> : ''}
+                  {subtitle ? <div style={lineSubtitleStyle}>{subtitle}</div> : ''}
                 </div>
+              </div>
             </div>
-            <div style={itemValue(value)}>{ value }</div>
+            <div style={itemValue(value)}>{value}</div>
           </div>
         )
       }
     }
 
     return (
-      <div style={ style }>
-        { createItem() }
+      <div style={style}>
+        {createItem()}
       </div>
     )
   }

@@ -11,18 +11,16 @@
     </LineContentItem>
  */
 
-import React from 'react';
+import React from 'react'
 
 export default class LineContentItem extends React.Component {
-
-  render() {
-
-    const { icon,title,content } = this.props;
+  render () {
+    const { icon, title, content } = this.props
 
     const style = {
       backgroundColor: '#fff',
       display: 'flex',
-      justifyContent:'space-between',
+      justifyContent: 'space-between',
       alignItems: 'center',
       padding: '0.8em 0.5em',
       fontSize: '14px',
@@ -31,13 +29,13 @@ export default class LineContentItem extends React.Component {
     }
 
     const leftStyle = {
-      display:' flex',
-      alignItems:'center',
+      display: ' flex',
+      alignItems: 'center'
     }
 
     const iconStyle = {
-      width:'48px',
-      height:'48px',
+      width: '48px',
+      height: '48px',
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
@@ -57,11 +55,11 @@ export default class LineContentItem extends React.Component {
 
     return (
       <div style={style}>
-        <div style={ leftStyle }>
-          { icon ? <div style={{ backgroundImage:`url(${icon})`,...iconStyle }} /> : ''}
-          { title ? <div style={ titleStyle }>{ title }</div> : '' }
+        <div style={leftStyle}>
+          {icon ? <div style={{ backgroundImage: `url(${icon})`, ...iconStyle }} /> : ''}
+          {title ? <div style={titleStyle}>{title}</div> : ''}
         </div>
-        { content ? <div style={ contentStyle }>{ content }</div> : '' }
+        {content ? <div style={contentStyle}>{content}</div> : ''}
       </div>
     )
   }

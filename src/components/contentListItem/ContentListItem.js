@@ -14,61 +14,59 @@
     </ContentListItem>
  */
 
-import React from 'react';
+import React from 'react'
 
 export default class ContentListItem extends React.Component {
+  onClick (route) {
+    const id = this.props.id || ''
+    if (route) {
+      window.location.href = `#${route}?id=${id}`
+    }
+  }
 
-   onClick = (route) => {
-     const id = this.props.id || '';
-     if(route){
-       window.location.href = `#${route}?id=${id}`
-     }
-   }
+  render () {
+    const { image, title, content, stats, route, detailText } = this.props
+    const icon = stats && stats.icon ? stats.icon : ''
+    const record = stats && stats.record !== undefined ? stats.record : ''
 
-   render(){
-
-     const { image,title,content,stats,route,detailText } = this.props;
-     const icon = stats && stats.icon ? stats.icon : '';
-     const record = stats && stats.record !== undefined ? stats.record  : '';
-
-     const style = {
-        backgroundColor:'#fff',
-        display:'flex',
-        marginBottom:'2px',
-        borderBottom: '1px solid #f2f2f2',
-        padding: '0.7em',
-        ...this.props.style,
-     }
+    const style = {
+      backgroundColor: '#fff',
+      display: 'flex',
+      marginBottom: '2px',
+      borderBottom: '1px solid #f2f2f2',
+      padding: '0.7em',
+      ...this.props.style
+    }
 
     const imageStyle = {
       width: '95px',
       height: '95px',
-      backgroundImage: `url(${ image })`,
+      backgroundImage: `url(${image})`,
       borderRadius: '2px',
       backgroundPosition: 'center center',
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
-      marginRight:'1.2em',
+      marginRight: '1.2em',
       ...this.props.imageStyle
     }
 
     const itemContent = {
-      width:`calc(100% - 95px - 1.2em)`,
-      display:'flex',
-      flexDirection:'column',
-      alignContent:'space-between',
+      width: 'calc(100% - 95px - 1.2em)',
+      display: 'flex',
+      flexDirection: 'column',
+      alignContent: 'space-between',
       ...this.props.itemContent
     }
 
     const titleStyle = {
-      fontSize:'16px',
+      fontSize: '16px',
       color: '#000',
       display: '-webkit-box',
       WebkitBoxOrient: 'vertical',
       WebkitLineClamp: 2,
       overflowY: 'hidden',
       maxHeight: '48px',
-      lineHeight:'1.3em',
+      lineHeight: '1.3em',
       ...this.props.titleStyle
     }
 
@@ -81,7 +79,7 @@ export default class ContentListItem extends React.Component {
       ...this.props.itemFooter
     }
 
-    const iconStyle =  {
+    const iconStyle = {
       width: '20px',
       height: '20px',
       marginRight: '0.8em',
@@ -95,45 +93,45 @@ export default class ContentListItem extends React.Component {
       overflowY: 'hidden',
       fontSize: '13px',
       color: '#888',
-      margin:'0.5em 0',
+      margin: '0.5em 0',
       ...this.props.contentStyle
     }
 
     const detailTextStyle = {
-      display:'inline-block',
+      display: 'inline-block',
       padding: '0.1em 0.5em',
       borderRadius: '10px',
-      border:'1px solid rgba(166, 166, 166, 1)',
-      color:'#666',
+      border: '1px solid rgba(166, 166, 166, 1)',
+      color: '#666',
       fontSize: '13px',
       ...this.props.detailTextStyle
     }
 
     const contentOutStyle = {
-      flex:1,
+      flex: 1
     }
 
-     return (
-       <div style={ style } onClick={ () => this.onClick(route) }>
-          <div style={ imageStyle }></div>
-          <div style={ itemContent} >
-              <div style={ titleStyle }>{ title }</div>
-              <div style={ contentOutStyle }>
-                <div style={ contentStyle }>{ content }</div>
-              </div>
-              <div style={ itemFooter }>
-                <div style= {{ display:'flex',alignItems:'center' }}>
-                  { icon ? <img src={ icon } alt='image' style={ iconStyle }/> : '' }
-                  { record !== undefined ? <span>{ record }</span> : '' }
-                </div>
-                {
-                  detailText ?
-                  <a style={ detailTextStyle } onClick={() => this.onClick(route)}>{ detailText }</a>
-                  : null
-                }
-              </div>
+    return (
+      <div style={style} onClick={() => this.onClick(route)}>
+        <div style={imageStyle} />
+        <div style={itemContent}>
+          <div style={titleStyle}>{title}</div>
+          <div style={contentOutStyle}>
+            <div style={contentStyle}>{content}</div>
           </div>
-       </div>
-     )
-   }
+          <div style={itemFooter}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              {icon ? <img src={icon} alt='image' style={iconStyle} /> : ''}
+              {record !== undefined ? <span>{record}</span> : ''}
+            </div>
+            {
+              detailText
+                ? <a style={detailTextStyle} onClick={() => this.onClick(route)}>{detailText}</a>
+                : null
+            }
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
